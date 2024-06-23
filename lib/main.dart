@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => DarkMode(),
       child: Consumer<DarkMode>(
-        builder: (context, wallpaperProvider, child) {
+        builder: (context, calculadoraAvanzadaProvider, child) {
           return MaterialApp(
-            title: 'Calculadora',
-            theme: wallpaperProvider.isDarkMode
+            title: 'Calculadora avanzada',
+            theme: calculadoraAvanzadaProvider.isDarkMode
                 ? ThemeData.dark()
                 : ThemeData.light(),
             home: const CalculadoraAvanzada(),
