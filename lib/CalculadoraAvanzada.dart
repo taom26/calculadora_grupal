@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+import 'package:calculadora_grupal/CustomIconButton.dart';
 import 'package:calculadora_grupal/DarkMode.dart';
 import 'package:calculadora_grupal/PantallaConfiguracion.';
 import 'package:flutter/material.dart';
@@ -13,8 +14,6 @@ class CalculadoraAvanzada extends StatefulWidget {
 }
 
 class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
-  bool scientificKeyboard = false;
-
   @override
   void initState() {
     super.initState();
@@ -27,16 +26,14 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
       appBar: AppBar(
         title: const Text('Calculadora - P.A'),
         actions: [
-          IconButton(
-            icon: Icon(
-              darkMode.isDarkMode ? Icons.dark_mode : Icons.light_mode,
-            ),
+          CustomIconButton(
+            icon: darkMode.isDarkMode ? Icons.dark_mode : Icons.light_mode,
             onPressed: () {
               darkMode.toggleTheme();
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.settings),
+          CustomIconButton(
+            icon: Icons.settings,
             onPressed: () {
               Navigator.push(
                 context,
