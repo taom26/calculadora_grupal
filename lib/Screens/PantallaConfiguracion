@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart'; // Asegúrate de importar correctamente DarkMode.dart
 
 class PantallaConfiguracion extends StatelessWidget {
-  const PantallaConfiguracion({Key? key}) : super(key: key); // Corrige el constructor
+  const PantallaConfiguracion({Key? key}) : super(key: key);
+
+  void _showAboutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AboutDialog(
+        applicationIcon: FlutterLogo(),
+        applicationLegalese: 'Legalese',
+        applicationName: 'Calculadora Programacion Avanzada',
+        applicationVersion: 'version 1.0.0',
+        children: [
+          Text('Grupo: Davila, Maliza y Tinitana'),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final darkMode = Provider.of<DarkMode>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Configuraciones'),
       ),
       body: ListView(
         children: [
-          SwitchListTile(
-            title: const Text('Tema Oscuro'),
-            value: darkMode.isDarkMode,
-            onChanged: (bool value) {
-              darkMode.toggleTheme();
-            },
+          ListTile(
+            title: const Text('Acerca de la aplicacion'),
+            onTap: () => _showAboutDialog(context),
           ),
         ],
       ),
     );
   }
 }
+
