@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<DarkMode>(
         builder: (context, darkMode, child) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'Calculadora avanzada',
             theme: darkMode.isDarkMode ? ThemeData.dark() : ThemeData.light(),
             home: const CalculadoraAvanzada(),
