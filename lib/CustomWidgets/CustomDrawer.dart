@@ -12,9 +12,9 @@ class CustomDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Color.fromARGB(255, 95, 11, 11),
             ),
-            child: Text('Drawer Header'),
+            child: Text('Super calculadora'),
           ),
           ListTile(
             title: const Text('Configuración'),
