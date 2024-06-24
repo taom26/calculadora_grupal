@@ -6,11 +6,10 @@ import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
 import 'package:calculadora_grupal/Screens/PantallaConfiguracion';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:calculadora_grupal/CustomWidgets/CustomDrawer.dart'; // Importa el nuevo widget personalizado
-import 'dart:math';
+import 'package:calculadora_grupal/CustomWidgets/CustomDrawer.dart';
 
 class CalculadoraAvanzada extends StatefulWidget {
-  const CalculadoraAvanzada({Key? key}) : super(key: key);
+  const CalculadoraAvanzada({super.key});
 
   @override
   _CalculadoraAvanzadaState createState() => _CalculadoraAvanzadaState();
