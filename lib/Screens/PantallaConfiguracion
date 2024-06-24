@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart'; // Asegúrate de importar correctamente DarkMode.dart
 
 class PantallaConfiguracion extends StatelessWidget {
-  const PantallaConfiguracion({super.key});
+  const PantallaConfiguracion({Key? key}) : super(key: key); // Corrige el constructor
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkMode>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Configuraciones'),
       ),
-      body: const Center(
-        child: Text('Settings screen content goes here.'),
+      body: ListView(
+        children: [
+          SwitchListTile(
+            title: const Text('Tema Oscuro'),
+            value: darkMode.isDarkMode,
+            onChanged: (bool value) {
+              darkMode.toggleTheme();
+            },
+          ),
+        ],
       ),
     );
   }
