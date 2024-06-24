@@ -44,9 +44,7 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
           ),
         ],
       ),
-      body: Center(
-          // Aquí iría el contenido de tu calculadora
-          ),
+      body: const Center(),
     );
   }
 }
