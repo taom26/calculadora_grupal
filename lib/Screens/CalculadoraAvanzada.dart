@@ -28,7 +28,7 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBar(
-        title: 'Calculadora - P.A',
+        title: 'Calculadora',
         actions: [
           CustomIconButton(
             icon: darkMode.isDarkMode ? Icons.dark_mode : Icons.light_mode,
