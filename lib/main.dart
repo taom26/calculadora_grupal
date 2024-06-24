@@ -1,5 +1,5 @@
-import 'package:calculadora_grupal/CalculadoraAvanzada.dart';
-import 'package:calculadora_grupal/DarkMode.dart';
+import 'package:calculadora_grupal/Screens/CalculadoraAvanzada.dart';
+import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,12 +13,10 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => DarkMode(),
       child: Consumer<DarkMode>(
-        builder: (context, calculadoraAvanzadaProvider, child) {
+        builder: (context, darkMode, child) {
           return MaterialApp(
             title: 'Calculadora avanzada',
-            theme: calculadoraAvanzadaProvider.isDarkMode
-                ? ThemeData.dark()
-                : ThemeData.light(),
+            theme: darkMode.isDarkMode ? ThemeData.dark() : ThemeData.light(),
             home: const CalculadoraAvanzada(),
           );
         },
