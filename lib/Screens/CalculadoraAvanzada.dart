@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:calculadora_grupal/CustomWidgets/CustomAppBar.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomIconButton.dart';
 import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
@@ -5,6 +7,7 @@ import 'package:calculadora_grupal/Screens/PantallaConfiguracion';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomDrawer.dart'; // Importa el nuevo widget personalizado
+import 'dart:math';
 
 class CalculadoraAvanzada extends StatefulWidget {
   const CalculadoraAvanzada({Key? key}) : super(key: key);
@@ -32,12 +35,20 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
     } else if (buttonText == "+" ||
         buttonText == "-" ||
         buttonText == "x" ||
-        buttonText == "÷") {
-      _num1 = double.parse(_input);
-      _operator = buttonText;
-      _input = "";
+        buttonText == "÷" ||
+        buttonText == "√" ||
+        buttonText == "%" ||
+        buttonText == "x^2" ||
+        buttonText == "1/x") {
+      if (_input.isNotEmpty) {
+        _num1 = double.parse(_input);
+        _operator = buttonText;
+        _input = "";
+      }
     } else if (buttonText == "=") {
-      _num2 = double.parse(_input);
+      if (_input.isNotEmpty) {
+        _num2 = double.parse(_input);
+      }
       if (_operator == "+") {
         _output = (_num1 + _num2).toString();
       } else if (_operator == "-") {
@@ -46,6 +57,14 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
         _output = (_num1 * _num2).toString();
       } else if (_operator == "÷") {
         _output = (_num1 / _num2).toString();
+      } else if (_operator == "√") {
+        _output = sqrt(_num1).toString();
+      } else if (_operator == "%") {
+        _output = (_num1 * (_num1 / 100)).toString();
+      } else if (_operator == "x^2") {
+        _output = (_num1 * _num1).toString();
+      } else if (_operator == "1/x") {
+        _output = (1 / _num1).toString();
       }
       _input = _output;
       _operator = "";
@@ -53,7 +72,6 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
       _input += buttonText;
       _output = _input;
     }
-
     setState(() {});
   }
 
@@ -126,172 +144,126 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                        label: "%",
-                        color: _getButtonColor("%"),
-                        onPressed: () => _buttonPressed("%")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "C",
-                        color: _getButtonColor("C"),
-                        onPressed: () => _buttonPressed("C")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "⌫",
-                        color: _getButtonColor("⌫"),
-                        onPressed: () => _buttonPressed("⌫")),
-                  ),
+                  CustomButton(
+                      label: "%",
+                      color: _getButtonColor("%"),
+                      onPressed: () => _buttonPressed("%")),
+                  CustomButton(
+                      label: "C",
+                      color: _getButtonColor("C"),
+                      onPressed: () => _buttonPressed("C")),
+                  CustomButton(
+                      label: "⌫",
+                      color: _getButtonColor("⌫"),
+                      onPressed: () => _buttonPressed("⌫")),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                        label: "1/x",
-                        color: _getButtonColor("1/x"),
-                        onPressed: () => _buttonPressed("1/x")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "x^2",
-                        color: _getButtonColor("x^2"),
-                        onPressed: () => _buttonPressed("x^2")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "√",
-                        color: _getButtonColor("√"),
-                        onPressed: () => _buttonPressed("√")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "÷",
-                        color: _getButtonColor("÷"),
-                        onPressed: () => _buttonPressed("÷")),
-                  ),
+                  CustomButton(
+                      label: "1/x",
+                      color: _getButtonColor("1/x"),
+                      onPressed: () => _buttonPressed("1/x")),
+                  CustomButton(
+                      label: "x^2",
+                      color: _getButtonColor("x^2"),
+                      onPressed: () => _buttonPressed("x^2")),
+                  CustomButton(
+                      label: "√",
+                      color: _getButtonColor("√"),
+                      onPressed: () => _buttonPressed("√")),
+                  CustomButton(
+                      label: "÷",
+                      color: _getButtonColor("÷"),
+                      onPressed: () => _buttonPressed("÷")),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                        label: "7",
-                        color: _getButtonColor("7"),
-                        onPressed: () => _buttonPressed("7")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "8",
-                        color: _getButtonColor("8"),
-                        onPressed: () => _buttonPressed("8")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "9",
-                        color: _getButtonColor("9"),
-                        onPressed: () => _buttonPressed("9")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "x",
-                        color: _getButtonColor("x"),
-                        onPressed: () => _buttonPressed("x")),
-                  ),
+                  CustomButton(
+                      label: "7",
+                      color: _getButtonColor("7"),
+                      onPressed: () => _buttonPressed("7")),
+                  CustomButton(
+                      label: "8",
+                      color: _getButtonColor("8"),
+                      onPressed: () => _buttonPressed("8")),
+                  CustomButton(
+                      label: "9",
+                      color: _getButtonColor("9"),
+                      onPressed: () => _buttonPressed("9")),
+                  CustomButton(
+                      label: "x",
+                      color: _getButtonColor("x"),
+                      onPressed: () => _buttonPressed("x")),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                        label: "4",
-                        color: _getButtonColor("4"),
-                        onPressed: () => _buttonPressed("4")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "5",
-                        color: _getButtonColor("5"),
-                        onPressed: () => _buttonPressed("5")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "6",
-                        color: _getButtonColor("6"),
-                        onPressed: () => _buttonPressed("6")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "-",
-                        color: _getButtonColor("-"),
-                        onPressed: () => _buttonPressed("-")),
-                  ),
+                  CustomButton(
+                      label: "4",
+                      color: _getButtonColor("4"),
+                      onPressed: () => _buttonPressed("4")),
+                  CustomButton(
+                      label: "5",
+                      color: _getButtonColor("5"),
+                      onPressed: () => _buttonPressed("5")),
+                  CustomButton(
+                      label: "6",
+                      color: _getButtonColor("6"),
+                      onPressed: () => _buttonPressed("6")),
+                  CustomButton(
+                      label: "-",
+                      color: _getButtonColor("-"),
+                      onPressed: () => _buttonPressed("-")),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                        label: "1",
-                        color: _getButtonColor("1"),
-                        onPressed: () => _buttonPressed("1")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "2",
-                        color: _getButtonColor("2"),
-                        onPressed: () => _buttonPressed("2")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "3",
-                        color: _getButtonColor("3"),
-                        onPressed: () => _buttonPressed("3")),
-                  ),
-                  Expanded(
-                    child: CustomButton(
-                        label: "+",
-                        color: _getButtonColor("+"),
-                        onPressed: () => _buttonPressed("+")),
-                  ),
+                  CustomButton(
+                      label: "1",
+                      color: _getButtonColor("1"),
+                      onPressed: () => _buttonPressed("1")),
+                  CustomButton(
+                      label: "2",
+                      color: _getButtonColor("2"),
+                      onPressed: () => _buttonPressed("2")),
+                  CustomButton(
+                      label: "3",
+                      color: _getButtonColor("3"),
+                      onPressed: () => _buttonPressed("3")),
+                  CustomButton(
+                      label: "+",
+                      color: _getButtonColor("+"),
+                      onPressed: () => _buttonPressed("+")),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                      label: "+/-",
-                      color: _getButtonColor("+/-"),
-                      onPressed: () => _buttonPressed("+/-"),
-                    ),
+                  CustomButton(
+                    label: "+/-",
+                    color: _getButtonColor("+/-"),
+                    onPressed: () => _buttonPressed("+/-"),
                   ),
-                  Expanded(
-                    child: CustomButton(
-                      label: "0",
-                      color: _getButtonColor("0"),
-                      onPressed: () => _buttonPressed("0"),
-                    ),
+                  CustomButton(
+                    label: "0",
+                    color: _getButtonColor("0"),
+                    onPressed: () => _buttonPressed("0"),
                   ),
-                  Expanded(
-                    child: CustomButton(
-                      label: ".",
-                      color: _getButtonColor("."),
-                      onPressed: () => _buttonPressed("."),
-                    ),
+                  CustomButton(
+                    label: ".",
+                    color: _getButtonColor("."),
+                    onPressed: () => _buttonPressed("."),
                   ),
-                  Expanded(
-                    child: CustomButton(
-                      label: "=",
-                      color: _getButtonColor("="),
-                      onPressed: () => _buttonPressed("="),
-                    ),
+                  CustomButton(
+                    label: "=",
+                    color: _getButtonColor("="),
+                    onPressed: () => _buttonPressed("="),
                   ),
                 ],
               ),
@@ -303,7 +275,6 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
   }
 }
 
-// Define el widget personalizado CustomButton
 class CustomButton extends StatelessWidget {
   final String label;
   final Color color;
@@ -317,19 +288,21 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(6.0),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          padding: const EdgeInsets.all(18.0),
-          textStyle: const TextStyle(fontSize: 24.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(125.0),
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.all(6.0),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: color,
+            padding: const EdgeInsets.all(18.0),
+            textStyle: const TextStyle(fontSize: 24.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(125.0),
+            ),
           ),
+          child: Text(label),
         ),
-        child: Text(label),
       ),
     );
   }
