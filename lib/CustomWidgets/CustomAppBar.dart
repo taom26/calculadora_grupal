@@ -19,8 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       actions: actions,
       leading: IconButton(
-        // Agregar IconButton para el Drawer
-        icon: Icon(Icons.menu),
+        icon: const Icon(Icons.menu),
         onPressed: onDrawerPressed,
       ),
     );
