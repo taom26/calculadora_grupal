@@ -1,15 +1,16 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
-// Define el widget personalizado CustomButton
 class CustomButton extends StatelessWidget {
-  final String label;
+  final String? label;
+  final IconData? icon;
   final Color color;
   final VoidCallback onPressed;
 
   const CustomButton({
     super.key,
-    required this.label,
+    this.label,
+    this.icon,
     required this.color,
     required this.onPressed,
   });
@@ -28,7 +29,12 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        child: Text(label),
+        child: icon != null
+            ? Icon(icon)
+            : Text(
+                label!,
+                style: const TextStyle(fontSize: 24.0),
+              ),
       ),
     );
   }

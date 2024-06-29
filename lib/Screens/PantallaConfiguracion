@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:calculadora_grupal/CustomWidgets/CustomAppBar.dart';
+import 'package:calculadora_grupal/CustomWidgets/CustomDrawer.dart';
+import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
+import 'package:calculadora_grupal/Screens/LanguageProvider.dart';
 
 class PantallaConfiguracion extends StatelessWidget {
-  const PantallaConfiguracion({Key? key}) : super(key: key);
+  PantallaConfiguracion({Key? key}) : super(key: key);
+
+  final List<String> idiomas = ['Español', 'Inglés', 'Francés'];
 
   void _showAboutDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AboutDialog(
-        applicationIcon: FlutterLogo(),
+        applicationIcon: const FlutterLogo(),
         applicationLegalese: 'Legalese',
         applicationName: 'Calculadora Programacion Avanzada',
         applicationVersion: 'version 1.0.0',
-        children: [
-          Text('Grupo: Davila, Maliza y Tinitana'),
+        children: const [
+          Text('Grupo - Programación Avanzada'),
+          Text('              Davila Carvajal Gabriel Omar'),
+          Text('              Maliza Anrango Denep Elieser'),
+          Text('              Tinitana Ortiz Mateo Javier'),
         ],
       ),
     );
@@ -21,19 +30,64 @@ class PantallaConfiguracion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Configuraciones'),
+      key: _scaffoldKey,
+      appBar: CustomAppBar(
+        title: 'Configuración',
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => _showAboutDialog(context),
+          ),
+        ],
+        onDrawerPressed: () {
+          _scaffoldKey.currentState!.openDrawer();
+        },
       ),
+      drawer: const CustomDrawer(),
       body: ListView(
         children: [
           ListTile(
-            title: const Text('Acerca de la aplicacion'),
+            title: const Text('Acerca de la aplicación'),
             onTap: () => _showAboutDialog(context),
+          ),
+          SwitchListTile(
+            title: const Text('Modo oscuro'),
+            value: context.watch<DarkMode>().isDarkMode,
+            onChanged: (bool value) {
+              context.read<DarkMode>().toggleTheme();
+            },
+          ),
+          ListTile(
+            title: const Text('Idioma de la aplicación'),
+            subtitle: Text(context.watch<LanguageProvider>().language),
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return ListView(
+                    children: idiomas.map((String idioma) {
+                      return ListTile(
+                        title: Text(idioma),
+                        onTap: () {
+                          context.read<LanguageProvider>().setLanguage(idioma);
+                          Navigator.pop(context);
+                          // Forzar la reconstrucción de la pantalla después del cambio de idioma
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Idioma cambiado')),
+                          );
+                        },
+                      );
+                    }).toList(),
+                  );
+                },
+              );
+            },
           ),
         ],
       ),
     );
   }
 }
-
