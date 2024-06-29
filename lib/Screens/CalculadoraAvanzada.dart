@@ -1,5 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, file_names
 import 'dart:math';
-
 import 'package:calculadora_grupal/CustomWidgets/CustomAppBar.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomIconButton.dart';
 import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
@@ -279,7 +279,8 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-  CustomButton({
+  const CustomButton({
+    super.key,
     required this.label,
     required this.color,
     required this.onPressed,
