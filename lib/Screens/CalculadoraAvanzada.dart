@@ -1,23 +1,22 @@
-// ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:calculadora_grupal/CustomWidgets/CustomHistory.dart';
 import 'package:calculadora_grupal/CustomWidgets/CalculatorScreen.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomAppBar.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomIconButton.dart';
 import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
-import 'package:calculadora_grupal/Screens/PantallaConfiguracion';
 import 'package:calculadora_grupal/CustomWidgets/CustomDrawer.dart';
+import 'package:provider/provider.dart';
 
 class CalculadoraAvanzada extends StatefulWidget {
   const CalculadoraAvanzada({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _CalculadoraAvanzadaState createState() => _CalculadoraAvanzadaState();
 }
 
 class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<String> history = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +33,12 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
             },
           ),
           CustomIconButton(
-            icon: Icons.settings,
+            icon: Icons.history,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PantallaConfiguracion(),
+                  builder: (context) => CustomHistory(history: history),
                 ),
               );
             },
@@ -52,7 +51,13 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
       drawer: const CustomDrawer(),
       body: Column(
         children: <Widget>[
-          CalculatorScreen(onAddHistory: (history) {}),
+          CalculatorScreen(
+            onAddHistory: (historyEntry) {
+              setState(() {
+                history.add(historyEntry);
+              });
+            },
+          ),
         ],
       ),
     );

@@ -245,7 +245,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     CustomButton(
                       label: 'e',
                       color: const Color.fromARGB(255, 255, 255, 88),
-                      onPressed: () => appendOperation('(2.71828)'),
+                      onPressed: () => appendOperation('2.71828'),
                     ),
                     CustomButton(
                       label: '=',
