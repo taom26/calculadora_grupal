@@ -17,6 +17,14 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    TextStyle buttonTextStyle = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      color:
+          isDarkMode ? Colors.black : const Color.fromARGB(255, 104, 103, 103),
+    );
+
     return Container(
       margin: const EdgeInsets.all(5.0),
       child: ElevatedButton(
@@ -24,16 +32,16 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           padding: const EdgeInsets.all(20.0),
-          textStyle: const TextStyle(fontSize: 24.0),
+          textStyle: buttonTextStyle,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
         child: icon != null
-            ? Icon(icon)
+            ? Icon(icon, color: buttonTextStyle.color)
             : Text(
                 label!,
-                style: const TextStyle(fontSize: 24.0),
+                style: buttonTextStyle,
               ),
       ),
     );
