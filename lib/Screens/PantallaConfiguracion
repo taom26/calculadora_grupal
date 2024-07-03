@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomAppBar.dart';
@@ -6,19 +7,19 @@ import 'package:calculadora_grupal/ModoOscuro/DarkMode.dart';
 import 'package:calculadora_grupal/Screens/LanguageProvider.dart';
 
 class PantallaConfiguracion extends StatelessWidget {
-  PantallaConfiguracion({Key? key}) : super(key: key);
+  PantallaConfiguracion({super.key});
 
   final List<String> idiomas = ['Español', 'Inglés', 'Francés'];
 
   void _showAboutDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AboutDialog(
-        applicationIcon: const FlutterLogo(),
+      builder: (context) => const AboutDialog(
+        applicationIcon: FlutterLogo(),
         applicationLegalese: 'Legalese',
         applicationName: 'Calculadora Programacion Avanzada',
         applicationVersion: 'version 1.0.0',
-        children: const [
+        children: [
           Text('Grupo - Programación Avanzada'),
           Text('              Davila Carvajal Gabriel Omar'),
           Text('              Maliza Anrango Denep Elieser'),
@@ -30,10 +31,10 @@ class PantallaConfiguracion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       appBar: CustomAppBar(
         title: 'Configuración',
         actions: [
@@ -43,7 +44,7 @@ class PantallaConfiguracion extends StatelessWidget {
           ),
         ],
         onDrawerPressed: () {
-          _scaffoldKey.currentState!.openDrawer();
+          scaffoldKey.currentState!.openDrawer();
         },
       ),
       drawer: const CustomDrawer(),
@@ -74,7 +75,6 @@ class PantallaConfiguracion extends StatelessWidget {
                         onTap: () {
                           context.read<LanguageProvider>().setLanguage(idioma);
                           Navigator.pop(context);
-                          // Forzar la reconstrucción de la pantalla después del cambio de idioma
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Idioma cambiado')),
                           );

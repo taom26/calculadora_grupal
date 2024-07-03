@@ -63,7 +63,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              padding: const EdgeInsets.all(50),
+              padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(),
               child: TextField(
                 decoration: const InputDecoration(
@@ -251,6 +251,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       label: '=',
                       color: const Color.fromARGB(255, 68, 255, 246),
                       onPressed: calculateResult,
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    const Spacer(),
+                    const Spacer(),
+                    const Spacer(),
+                    CustomButton(
+                      label: 'x',
+                      color: const Color.fromARGB(255, 255, 255, 88),
+                      onPressed: () => appendOperation('x'),
                     ),
                   ],
                 ),
