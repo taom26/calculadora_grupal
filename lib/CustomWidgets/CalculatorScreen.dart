@@ -256,6 +256,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 ),
               ],
             ),
+            ElevatedButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Snackbar mostrado'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.access_alarm),
+              label: const Text('Botón con Snackbar'),
+            ),
           ],
         ),
       ),
