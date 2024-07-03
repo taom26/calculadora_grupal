@@ -240,7 +240,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     CustomButton(
                       label: 'log',
                       color: const Color.fromARGB(255, 255, 255, 88),
-                      onPressed: () => appendOperation('log('),
+                      onPressed: () => appendOperation('log'),
                     ),
                     CustomButton(
                       label: 'e',
@@ -251,18 +251,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       label: '=',
                       color: const Color.fromARGB(255, 68, 255, 246),
                       onPressed: calculateResult,
-                    ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const Spacer(),
-                    const Spacer(),
-                    const Spacer(),
-                    CustomButton(
-                      label: 'x',
-                      color: const Color.fromARGB(255, 255, 255, 88),
-                      onPressed: () => appendOperation('x'),
                     ),
                   ],
                 ),
