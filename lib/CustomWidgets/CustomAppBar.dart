@@ -16,7 +16,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontFamily: 'Arial',
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
       actions: actions,
       leading: IconButton(
         icon: const Icon(Icons.menu),
