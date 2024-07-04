@@ -49,17 +49,18 @@ class _CalculadoraAvanzadaState extends State<CalculadoraAvanzada> {
         },
       ),
       drawer: const CustomDrawer(),
-      body: Column(
-        children: <Widget>[
-          CalculatorScreen(
+      body: Column(children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: CalculatorScreen(
             onAddHistory: (historyEntry) {
               setState(() {
                 history.add(historyEntry);
               });
             },
           ),
-        ],
-      ),
+        )
+      ]),
     );
   }
 }
