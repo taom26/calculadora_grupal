@@ -1,3 +1,4 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:calculadora_grupal/CustomWidgets/CustomButton.dart';
@@ -5,8 +6,7 @@ import 'package:calculadora_grupal/CustomWidgets/CustomButton.dart';
 class CalculatorScreen extends StatefulWidget {
   final Function(String) onAddHistory;
 
-  const CalculatorScreen({Key? key, required this.onAddHistory})
-      : super(key: key);
+  const CalculatorScreen({super.key, required this.onAddHistory});
 
   @override
   _CalculatorScreenState createState() => _CalculatorScreenState();
@@ -255,6 +255,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   ],
                 ),
               ],
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Este trabajo es para 20 :)'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.warning_outlined),
+              label: const Text('Advertencia!'),
             ),
           ],
         ),
